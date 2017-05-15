@@ -49,6 +49,7 @@ django.setup()
 
 from webhook_launcher.app.payload import get_payload
 
+from mirror_git_data import mirror_netloc
 
 class ParticipantHandler(object):
     """ Participant class as defined by the SkyNET API """
@@ -73,7 +74,7 @@ class ParticipantHandler(object):
         payload_url = payload.url
         parsed_url = urlparse.urlparse(payload_url)
 
-        if parsed_url.netloc not in ("git.omprussia.ru",):
+        if parsed_url.netloc not in (mirror_netloc,):
             wid.fields.mirror_repourl = payload_url
             wid.fields.should_mirror = True
 
