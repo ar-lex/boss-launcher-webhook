@@ -187,22 +187,22 @@ class ParticipantHandler(object):
             upstream_parsed_url.path.strip("/")
         )
 
-       if not os.system("git ls-remote %s" % upstream_url) == 0:
-           raise RuntimeError("Failed to read mirroring source: %s" % upstream_url)
+        if not os.system("git ls-remote %s" % upstream_url) == 0:
+            raise RuntimeError("Failed to read mirroring source: %s" % upstream_url)
 
-       if not os.system("git ls-remote %s" % mirror_url) == 0:
-           raise RuntimeError("Failed to read mirroring target: %s" % mirror_url)
+        if not os.system("git ls-remote %s" % mirror_url) == 0:
+            raise RuntimeError("Failed to read mirroring target: %s" % mirror_url)
 
-       if not os.path.exists(mirror_path):
-           os.makedirs(mirror_path)
-           os.chdir(mirror_path)
-           os.system("git --bare init")
-           os.system("git remote add mirror %s" % mirror_url)
-           os.system("git remote add upstream %s" % upstream_url)
+        if not os.path.exists(mirror_path):
+            os.makedirs(mirror_path)
+            os.chdir(mirror_path)
+            os.system("git --bare init")
+            os.system("git remote add mirror %s" % mirror_url)
+            os.system("git remote add upstream %s" % upstream_url)
         else:
-           os.chdir(mirror_path)
-           os.system("git remote set-url mirror %s" % mirror_url)
-           os.system("git remote set-url upstream %s" % upstream_url)
+            os.chdir(mirror_path)
+            os.system("git remote set-url mirror %s" % mirror_url)
+            os.system("git remote set-url upstream %s" % upstream_url)
 
         os.system("git remote update mirror")
         os.system("git remote update upstream")
