@@ -30,6 +30,9 @@
    :should_mirror (Boolean):
       True if VCSCOMMIT_QUEUE should mirror the repository
 
+   :mirror_repourl (String):
+      The url of the git repository to mirror if should_mirror is True
+
    :result (Boolean):
       True if the everything went OK, False otherwise
 
@@ -45,7 +48,6 @@ django.setup()
 
 
 from webhook_launcher.app.payload import get_payload
-from webhook_launcher.app.boss import launch_pdef
 
 
 class ParticipantHandler(object):
@@ -72,6 +74,7 @@ class ParticipantHandler(object):
         parsed_url = urlparse.urlparse(payload_url)
 
         if parsed_url.netloc not in ("git.omprussia.ru",):
+            wid.fields.mirror_repourl = payload_url
             wid.fields.should_mirror = True
 
         wid.result = True

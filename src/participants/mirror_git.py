@@ -20,7 +20,7 @@
 :term:`Workitem` fields IN:
 
 :Parameters:
-   :repourl (str):
+   :mirror_repourl (str):
       Url of git repository to mirror
 
 :term:`Workitem` fields OUT:
@@ -34,15 +34,6 @@
 
 import os
 import urlparse
-
-
-os.environ['DJANGO_SETTINGS_MODULE'] = 'webhook_launcher.settings'
-import django
-django.setup()
-
-
-from webhook_launcher.app.payload import get_payload
-from webhook_launcher.app.boss import launch_pdef
 
 
 class ParticipantHandler(object):
@@ -60,11 +51,10 @@ class ParticipantHandler(object):
         """ Workitem handling function """
         wid.result = False
 
-        if wid.fields.payload is None:
-            raise RuntimeError("Missing mandatory field: payload")
+        if wid.fields.mirror_repourl is None:
+            raise RuntimeError("Missing mandatory field: mirror_repourl")
 
-	payload = get_payload(wid.fields.payload.as_dict())
-	upstream_url = payload.url
+        upstream_url = wid.fields.mirror_repourl
         self.log.info("Mirroring %s" % upstream_url)
         GITBASE = os.environ["HOME"] + "/mirror_git"
         url_replacements = [
