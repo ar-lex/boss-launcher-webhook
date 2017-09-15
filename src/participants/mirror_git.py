@@ -94,7 +94,7 @@ class ParticipantHandler(object):
         os.system("git remote update upstream")
         os.system("cp -rf refs/remotes/upstream/* refs/heads/")
 
-        if not os.system("git push mirror 'refs/tags/*' 'refs/heads/*'") == 0:
+        if not os.system("git push --force mirror 'refs/tags/*' 'refs/heads/*'") == 0:
             raise RuntimeError("Failed to push to mirroring target: %s" % mirror_url)
 
         wid.result = True
