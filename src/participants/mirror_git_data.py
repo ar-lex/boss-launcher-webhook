@@ -2,6 +2,7 @@ mirror_scheme = "https"
 mirror_netloc = "git.omprussia.ru"
 url_replacements = [
     ("jolla/p4903", "jolla-p4903/p4903"),
+    ("jolla/f5121", "jolla-f5121/f5121"),
     ("mer-hybris/ngfd-plugin-pulse", "mer-core/ngfd-plugin-pulse"),
     ("mer-packages/build-compare", "mer-core/build-compare"),
     ("mer-packages/busybox", "mer-core/busybox"),
@@ -113,6 +114,7 @@ url_replacements = [
     ("nemomobile/tumbler", "mer-core/tumbler"),
     ("nemomobile/tut", "mer-core/tut"),
     ("nemomobile/vmtouch", "mer-core/vmtouch"),
-    ("sailfishos/vo-aacenc", "mer-core/vo-aacenc")
+    ("sailfishos/vo-aacenc", "mer-core/vo-aacenc"),
+    ("fs/omp-fe", "cloud/omp-fe"),
 ]
 
